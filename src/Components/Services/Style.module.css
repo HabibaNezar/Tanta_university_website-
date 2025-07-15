@@ -1,0 +1,78 @@
+.layer {
+    transform: translateY(100%);
+    transition: transform 0.3s ease-in-out;
+}
+.student:hover .layer {
+    transform: translateY(0);
+}
+
+/* ----------------------------------------- */
+.draw {
+    position: relative;
+    display: inline-block;
+    transition: color 0.3s ease-in-out;
+}
+
+/* الخطوط تبدأ من الزوايا ويتم رسمها تدريجياً */
+.draw::before, 
+.draw::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 2px solid transparent;
+}
+
+/* الخط العلوي الأيسر */
+.draw::before {
+    top: 0;
+    left: 0;
+    transition: width 0.3s ease-out, height 0.3s ease-out 0.3s;
+}
+
+/* الخط السفلي الأيمن */
+.draw::after {
+    bottom: 0;
+    right: 0;
+    transition: border-color 0s ease-out 0.5s, width 0.3s ease-out 0.5s, height 0.3s ease-out 0.8s;
+}
+
+/* عند التفعيل (isActive) يتم رسم البوردر */
+.draw.drawActive::before, 
+.draw.drawActive::after {
+    width: 100%;
+    height: 100%;
+}
+
+/* تحديد الألوان بعد تمدد الـ width والـ height */
+.draw.drawActive::before {
+    border-top-color: var(--main-color);
+    border-right-color: var(--main-color);
+}
+
+.draw.drawActive::after {
+    border-bottom-color: var(--main-color);
+    border-left-color: var(--main-color);
+}
+
+/* عند إلغاء التفعيل، نخلي الـ border يختفي فورًا */
+.draw:not(.drawActive)::before, 
+.draw:not(.drawActive)::after {
+    transition: none; /* يمنع التأخير في الاختفاء */
+    width: 0;
+    height: 0;
+}
+
+/* ----------------------------------------- */
+  
+  .cardTransition {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  
+  .cardTransitionActive {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  

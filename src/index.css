@@ -1,0 +1,138 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root {
+  --main-color: #0CAF9E;
+  --hover-color: #0fd8c4;
+
+}
+
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Tajawal", sans-serif;
+  overflow-x: hidden;
+}
+
+
+/* --------- */
+
+.service button.slick-arrow.slick-next,
+.service button.slick-arrow.slick-prev
+{
+  display: none !important;
+}
+
+/* تأكد أن السلايدر يحتوي على position: relative */
+.section-2 {
+  position: relative;
+}
+
+/* ضبط مكان النقاط */
+.service .slick-dots {
+  position: absolute;
+  top: -35px; /* يحدد المسافة من الأعلى */
+  right: 0px; /* يحطها جنب "أحدث الخدمات" */
+  display: flex !important;
+  gap: 8px; /* مسافة بين النقاط */
+  z-index: 0;
+  height: 10px;
+}
+
+/* تغيير لون النقطة النشطة */
+.service .slick-dots li.slick-active button::before {
+  color: white !important;
+}
+
+/* تغيير لون باقي النقاط */
+.slick-dots li button::before {
+  /* color: black !important; */
+  /* opacity: 0.5; */
+}
+
+
+
+
+
+
+
+
+
+
+.news .slick-next,
+.news .slick-prev {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    border-radius: 50% !important;
+    z-index: 10 !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    margin-inline: -50px;
+    transition: background-color 0.3s ease-in-out;
+    transform-origin: center; /* تثبيت الدوران عند المركز */
+    position: absolute; /* تثبيت الزر */
+    top: 50%; /* وضعه في المنتصف */
+    transform: translateY(-50%); /* تصحيح تموضعه */
+}
+
+/* الحدود المختلفة لكل زر */
+.news .slick-next {
+    border-top: 2px solid var(--main-color);
+    border-left: 2px solid var(--main-color);
+    border-right: 2px solid transparent;
+    border-bottom: 2px solid var(--main-color);
+}
+
+.news .slick-prev {
+    border-top: 2px solid var(--main-color);
+    border-left: 2px solid transparent;
+    border-right: 2px solid var(--main-color);
+    border-bottom: 2px solid var(--main-color);
+}
+
+/* تعريف الأنيميشن */
+@keyframes rotateButton {
+    0% {
+        transform: translateY(-50%) rotate(0deg); /* يبدأ من المنتصف */
+    }
+    100% {
+        transform: translateY(-50%) rotate(360deg); /* يدور ويبقى في المنتصف */
+    }
+}
+
+/* تأثير الـ hover */
+.news .slick-next:hover,
+.news .slick-prev:hover {
+    background-color: var(--main-color);
+    animation: rotateButton 0.5s ease-in-out; /* يدور مرة واحدة فقط */
+}
+
+/* تغيير لون الأيقونة داخل السهم */
+.news .slick-prev::before,
+.news .slick-next::before {
+    content: "\f061" !important; /* أيقونة Font Awesome للسهم */
+    font-family: "Font Awesome 5 Free" !important;
+    font-weight: 900;
+    color: var(--main-color) !important;
+    font-size: 16px !important;
+    transition: color 0.3s ease-in-out;
+}
+
+/* تغيير شكل السهم لليمين */
+.news .slick-next::before {
+    content: "\f060" !important;
+}
+
+/* تغيير لون الأيقونة عند الـ hover */
+.news .slick-prev:hover::before,
+.news .slick-next:hover::before {
+    color: white !important;
+}
+
+.news .slick-dots{
+  display: none !important;
+}

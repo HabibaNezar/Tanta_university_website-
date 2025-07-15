@@ -1,0 +1,100 @@
+.dropdownMenu {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    background-color: var(--main-color);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 180px;
+    padding: 0;
+    z-index: 1000;
+    
+    overflow: visible !important;  
+    display: none;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    box-sizing: border-box;
+  }
+  
+  .dropdownMenu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 180px;
+  }
+  
+  .dropdownMenu li {
+    padding: 10px 15px;
+    width: 180px;
+    border-radius: 0.5rem;
+  }
+  
+  .dropdownMenu li a {
+    text-decoration: none;
+    color: white;
+    display: block;
+    width: 180px;
+
+  }
+  
+  .dropdownMenu li:hover {
+    width: 180px;
+    background-color: var(--hover-color);
+  }
+  
+  /* 🟢 عندما تكون القائمة مفتوحة */
+  .dropdownMenu.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+
+  /* //////////////////////// */
+
+  .subdropdownMenu {
+    background-color: white;
+    position: absolute;
+    top: 0;
+    right: 180px !important;
+    left: 300px !important;
+    z-index: 2000 !important;
+    overflow: visible;
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+
+  .subdropdownMenu ul li a{
+    color: var(--main-color);
+  }
+  
+  .subdropdownMenu.show {
+    max-height: 300px;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .mylist li a{
+    width: fit-content;
+  }
+  
+  .mylist li:hover  a{
+    background-color: var(--hover-color) !important;
+    color: white;
+
+  }
+
+  .final{
+    top: 50% !important;
+  }
+
+  .lastfinal{
+    top: 50% !important;
+  }
+
+  
+  
+  
