@@ -40,7 +40,7 @@ export default function ExamSchedule() {
   // ✅ Handle Submit
   async function handleSubmit(values) {
     try {
-      const { data } = await axios.post('http://tantaappdemo.runasp.net/api/schedules', values , {headers:headers})
+      const { data } = await axios.post('https://tantaappdemo.runasp.net/api/schedules', values , {headers:headers})
       console.log('تم الإرسال:', data)
       toast.success('تم إرسال جدول الامتحانات بنجاح')
     } catch (error) {

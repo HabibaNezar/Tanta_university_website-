@@ -10,12 +10,12 @@ export default function User() {
 
   // ✅ Validation Schema
   const validationSchema = yup.object().shape({
-    category: yup
+    userTypeID: yup
     .number()
     .oneOf([1, 2, 3, 4], 'من فضلك اختر فئة صحيحة')
     .required('من فضلك اختر فئة'),
 
-    password: yup
+    nationalNumber: yup
     .string()
     .required('الرقم القومي مطلوب')
     .matches(/^\d+$/, 'الرقم القومي يجب أن يحتوي على أرقام فقط')
@@ -26,8 +26,8 @@ export default function User() {
   // ✅ Formik Setup
   const formik = useFormik({
     initialValues: {
-      category: '',
-      password: ''
+      userTypeID: '',
+      nationalNumber: ''
     },
     onSubmit: handleRegister,
     validationSchema
@@ -36,7 +36,7 @@ export default function User() {
   // ✅ Handle Submit
   async function handleRegister(values) {
     try {
-      const { data } = await axios.post(`http://tantaappdemo.runasp.net/api/auth/login`, values );
+      const { data } = await axios.post(`https://tantaappdemo.runasp.net/api/auth/login`, values );
       console.log(data);
       if(data.message === 'Login successful'&& data.roleName === `Admin`){
         navigate(`/Admin`);
@@ -53,13 +53,13 @@ export default function User() {
   return (
     <form className="max-w-sm mx-auto my-36" onSubmit={formik.handleSubmit}>
       {/* select category */}
-      <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">اختر الفئة</label>
+      <label htmlFor="userTypeID" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">اختر الفئة</label>
       <select
-        id="category"
-        name="category"
-        onChange={(e) => {formik.setFieldValue('category', Number(e.target.value));}}
+        id="userTypeID"
+        name="userTypeID"
+        onChange={(e) => {formik.setFieldValue('userTypeID', Number(e.target.value));}}
         onBlur={formik.handleBlur}
-        value={formik.values.category}
+        value={formik.values.userTypeID}
         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[--main-color] focus:border-[--main-color] block w-full p-2.5"
       >
         <option value="" disabled hidden>
@@ -70,24 +70,24 @@ export default function User() {
         <option value='3'>عضو هيئة تدريس</option>
         <option value='4'>تسجيل عامل</option>
       </select>
-      {formik.touched.category && formik.errors.category && (
-        <div className="text-red-600 text-sm mt-1">{formik.errors.category}</div>
+      {formik.touched.userTypeID && formik.errors.userTypeID && (
+        <div className="text-red-600 text-sm mt-1">{formik.errors.userTypeID}</div>
       )}
 
-      {/* password input */}
+      {/* nationalNumber input */}
       <div className="mb-5 mt-8">
-        <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">الرقم القومي</label>
+        <label htmlFor="nationalNumber" className="block mb-2 text-sm font-medium text-gray-900">الرقم القومي</label>
         <input
           type="password"
-          id="password"
-          name="password"
+          id="nationalNumber"
+          name="nationalNumber"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          value={formik.values.password}
+          value={formik.values.nationalNumber}
           className="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[--main-color] focus:border-[--main-color] block w-full p-2.5"
         />
-        {formik.touched.password && formik.errors.password && (
-          <div className="text-red-600 text-sm mt-1">{formik.errors.password}</div>
+        {formik.touched.nationalNumber && formik.errors.nationalNumber && (
+          <div className="text-red-600 text-sm mt-1">{formik.errors.nationalNumber}</div>
         )}
       </div>
 

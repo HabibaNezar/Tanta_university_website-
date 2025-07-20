@@ -31,7 +31,7 @@ export default function CreateFaculty() {
   // ✅ Handle Submit
   async function handleSubmit(values) {
     try {
-      const { data } = await axios.post('http://tantaappdemo.runasp.net/api/schedules', values , {headers:headers})
+      const { data } = await axios.post('https://tantaappdemo.runasp.net/api/schedules', values , {headers:headers})
       console.log('تم الإرسال:', data)
       toast.success('تم إرسال بيانات الكلية بنجاح')
     } catch (error) {
