@@ -30,15 +30,46 @@ export default function CreateFaculty() {
 
   // ✅ Handle Submit
   async function handleSubmit(values) {
-    try {
-      const { data } = await axios.post('https://tantaappdemo.runasp.net/api/schedules', values , {headers:headers})
-      console.log('تم الإرسال:', data)
-      toast.success('تم إرسال بيانات الكلية بنجاح')
-    } catch (error) {
-      console.error('حدث خطأ أثناء الإرسال:', error)
-      toast.error('حدث خطأ أثناء إرسال البيانات')
+  try {
+    console.log("القيم المرسلة:", values)
+    console.log("الهيدر:", headers)
+
+    const { data } = await axios.post(
+      'https://tantaappdemo.runasp.net/api/faculties',
+      values,
+      { headers }
+    )
+
+    console.log('تم الإرسال:', data)
+    toast.success('تم إرسال بيانات الكلية بنجاح')
+  } catch (error) {
+    if (error.response) {
+      const message = error.response.data.message;
+
+      // 🔴 معرف الكلية مكرر
+      if (message === "Faculty ID already exists") {
+        toast.error("⚠️ معرف الكلية مستخدم بالفعل. برجاء اختيار معرف آخر.");
+      }
+
+      // 🔴 اسم الكلية مكرر
+      else if (message === "Faculty name already exists") {
+        toast.error("⚠️ اسم الكلية موجود بالفعل. برجاء اختيار اسم آخر.");
+      }
+
+      // 🔴 خطأ آخر من السيرفر برسالة عامة
+      else {
+        toast.error(`حدث خطأ: ${message}`);
+      }
+
+      console.error("رد السيرفر:", error.response.data);
+    } else {
+      toast.error('❌ حدث خطأ في الاتصال بالسيرفر');
+      console.error("خطأ:", error.message);
     }
   }
+}
+
+
 
   return (
     <form className="max-w-md mx-auto my-32" onSubmit={formik.handleSubmit}>

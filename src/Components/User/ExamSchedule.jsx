@@ -39,15 +39,36 @@ export default function ExamSchedule() {
 
   // ✅ Handle Submit
   async function handleSubmit(values) {
-    try {
-      const { data } = await axios.post('https://tantaappdemo.runasp.net/api/schedules', values , {headers:headers})
-      console.log('تم الإرسال:', data)
-      toast.success('تم إرسال جدول الامتحانات بنجاح')
-    } catch (error) {
-      console.error('حدث خطأ أثناء الإرسال:', error)
-      toast.error('حدث خطأ أثناء إرسال البيانات')
+  try {
+    console.log("القيم المرسلة:", values);
+    console.log("الهيدر:", headers);
+
+    const { data } = await axios.post(
+      'https://tantaappdemo.runasp.net/api/examschedule',
+      values,
+      { headers }
+    );
+
+    console.log('تم الإرسال:', data);
+    toast.success('✅ تم إرسال جدول الامتحانات بنجاح');
+  } catch (error) {
+    if (error.response) {
+      console.error('رد السيرفر:', error.response.data);
+
+      const message = error.response.data.message;
+
+      if (message) {
+        toast.error(`⚠️ ${message}`);
+      } else {
+        toast.error('⚠️ حدث خطأ في البيانات المرسلة.');
+      }
+    } else {
+      console.error('خطأ عام:', error.message);
+      toast.error('❌ حدث خطأ في الاتصال بالسيرفر');
     }
   }
+}
+
 
   return (
     <form className="max-w-md mx-auto my-32" onSubmit={formik.handleSubmit}>

@@ -8,9 +8,7 @@ import toast , {Toaster} from 'react-hot-toast'
 
 export default function StudySchedule() {
   const navigate = useNavigate()
-  let headers = {
-    Authorization: `Bearer ${localStorage.getItem('userToken')}`
-  }
+  
   
   // ✅ Validation Schema
   const validationSchema = yup.object().shape({
@@ -40,14 +38,23 @@ export default function StudySchedule() {
 
   // ✅ Handle Submit
   async function handleSubmit(values) {
-    try {
-      const { data } = await axios.post('https://tantaappdemo.runasp.net//schedules', values , {headers:headers})
-      console.log('تم الإرسال:', data)
-      toast.success(`تم الارسال `)
-    } catch (error) {
-      console.error('حدث خطأ أثناء إرسال الجدول:', error)
+  try {
+    const token = localStorage.getItem('userToken')
+    console.log("التوكن المستخدم:", token)
+
+    const headers = {
+      Authorization: `Bearer ${token}`
     }
+
+    const { data } = await axios.post('https://tantaappdemo.runasp.net/api/studyschedule', values, { headers:headers })
+    console.log('تم الإرسال:', data)
+    toast.success(`تم الارسال `)
+  } catch (error) {
+    console.error('حدث خطأ أثناء إرسال الجدول:', error)
+    toast.error("فشل في الإرسال: " + error.response?.data?.message || "حدث خطأ")
   }
+}
+
 
   return (
     <form className="max-w-md mx-auto my-32" onSubmit={formik.handleSubmit}>

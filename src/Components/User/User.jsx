@@ -39,10 +39,13 @@ export default function User() {
       const { data } = await axios.post(`https://tantaappdemo.runasp.net/api/auth/login`, values );
       console.log(data);
       if(data.message === 'Login successful'&& data.roleName === `Admin`){
+        localStorage.setItem('userData', JSON.stringify(data));
+        localStorage.setItem('userToken', data.token);  
         navigate(`/Admin`);
-        localStorage.setItem('userToken', values.data.token)
       }
       else if (data.message === 'Login successful') {
+        localStorage.setItem('userData', JSON.stringify(data));
+        localStorage.setItem('userToken', data.token);  
         navigate(`/UserProfile`);
       }
     } catch (error) {

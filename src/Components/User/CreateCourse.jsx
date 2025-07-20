@@ -41,7 +41,7 @@ export default function CreateCourse() {
   // ✅ Handle Submit
   async function handleSubmit(values) {
     try {
-      const { data } = await axios.post('https://tantaappdemo.runasp.net/api/schedules', values , {headers:headers})
+      const { data } = await axios.post('https://tantaappdemo.runasp.net/api/courses', values , {headers:headers})
       console.log('تم إرسال المقرر:', data)
       toast.success('تم إرسال بيانات المقرر بنجاح')
     } catch (error) {
