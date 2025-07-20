@@ -1,6 +1,6 @@
 import React from "react";
 import Slider from "react-slick";
-import { NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import style from "../Excellence/Excellence.module.css";
 // import img from "../../assets/image.png";
 import img1 from "../../assets/star.png";
@@ -43,12 +43,12 @@ export default function Excellence() {
   };
 
   let data = [
-    {img:mg1 , title: "مستشفي57357"},
-    {img:mg2 , title: "الجمهورية الجديدة"},
-    {img:mg3 , title: "وحدة الروبوتات"},
-    {img:mg4 , title: "منصة دالتا للحاسبات"},
-    {img:mg5 , title: "مستشفي 900900"},
-    {img:mg6 , title: "جامعتنا في 2020"},
+    {img:mg1 , title: "مستشفي57357" , Link: 'https://hospitals.tanta.edu.eg/hospitals/details/57357'},
+    {img:mg2 , title: "الجمهورية الجديدة" , Link: 'https://tanta.edu.eg/egypt2030.aspx'},
+    {img:mg3 , title: "وحدة الروبوتات" , Link: 'https://tanta.edu.eg/robotic-units.aspx'},
+    {img:mg4 , title: "منصة دالتا للحاسبات" , Link: 'https://tdb.tanta.edu.eg/universitybudget/Default.aspx'},
+    {img:mg5 , title: "مستشفي 900900" , Link: 'https://hospitals.tanta.edu.eg/hospitals/details/900900'},
+    {img:mg6 , title: "جامعتنا في 2020" , Link: 'https://tanta.edu.eg/university2020.aspx'},
   ]
   
 
@@ -84,7 +84,7 @@ export default function Excellence() {
             <div className="h-[60vh] flex justify-center overflow-hidden min-w-0">
                 <Slider {...settings} className="w-full max-w-3xl xl:mt-10 ">
                     {data.map((item, index) => (
-                    <div key={index} className="relative overflow-hidden group px-2 cursor-pointer shadows">
+                    <a key={index}  target="_blank" href={item.Link}><div className="relative overflow-hidden group px-2 cursor-pointer shadows">
                         <div className="relative w-full h-full overflow-hidden rounded-lg"> {/* إضافة overflow-hidden هنا */}
                         {/* 🔹 الصورة مع تأثير الزوم */}
                         <img
@@ -102,7 +102,7 @@ export default function Excellence() {
                         </p>
 
                     </div>
-                    </div>
+                    </div></a>
                     ))}
                 </Slider>
             </div>

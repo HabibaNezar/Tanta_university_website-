@@ -5,6 +5,7 @@ import img1 from '../../assets/news.jpeg'
 import style from '../News/News.module.css'
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios'
+import { NavLink } from 'react-router-dom';
 
 export default function News() {
 
@@ -66,16 +67,17 @@ export default function News() {
 
                 {/* الديف الثالث: الزر */}
                 <div>
-                    <p className="text-xs font-medium rounded-md px-4 py-1 bg-[--main-color] text-white hover:bg-white hover:text-[--main-color] border border-[--main-color] cursor-pointer">
+                    <NavLink to={`NewsArchieve`}><p className="text-xs font-medium rounded-md px-4 py-1 bg-[--main-color] text-white hover:bg-white hover:text-[--main-color] border border-[--main-color] cursor-pointer">
                     أرشيف الأخبار
                     <span className='px-2 text-[--hover-color]'><i className="fa-solid fa-chevron-left"></i></span>
-                    </p>
+                    </p></NavLink>
                 </div>
             </div>
             <div className="slider pt-10 mx-16 xl:mx-0">
                 <Slider {...settings} className={ `news min-h-[300px]`}>
                     {data?.data?.map((data) => (
-                        <div key={data.id} className="relative overflow-hidden group px-2 cursor-pointer"> 
+                        <NavLink to={`/NewsDetails/${data.id}`} key={data.id}>
+                            <div  className="relative overflow-hidden group px-2 cursor-pointer" > 
                         {/* 🔹 تغليف الصورة والجردينت داخل div جديد لإبقاء الجردينت على الصورة فقط */}
                             <div className="relative w-full h-full">
                                 {/* 🔹 الصورة مع تأثير الزوم */}
@@ -95,7 +97,7 @@ export default function News() {
                                 <span className="inline-block">{data.breifAr?.split(" ").slice(0, 10).join(" ")}</span>
                                 <span className={`${style.m} " inline-block ltr"`}>...</span>
                             </p>
-                        </div>
+                        </div></NavLink>
                     ))}
                 </Slider>
             </div>

@@ -75,4 +75,11 @@
     opacity: 1;
     transform: translateY(0);
   }
+
+
+  .drawActivee {
+  color: var(--main-color);
+  border-bottom: 2px solid var(--main-color);
+}
+
   

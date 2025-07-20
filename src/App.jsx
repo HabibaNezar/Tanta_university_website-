@@ -18,6 +18,22 @@ import ResearchProjects from './Components/ScientificResearch/ResearchProjects';
 import ScientificJournals from './Components/ScientificResearch/ScientificJournals';
 import ResearchCenters from './Components/ScientificResearch/ResearchCenters';
 import ScientificConferences from './Components/ScientificResearch/ScientificConferences';
+import Contact from './Components/Contact/Contact';
+import SocialMedia from './Components/Contact/SocialMedia';
+import Location from './Components/Contact/Location';
+import ServicesList from './Components/Services/ServicesList';
+import NewsDetails from './Components/News/NewsDetails';
+import MoreScientists from './Components/Scientists/MoreScientists';
+import NewsArchieve from './Components/News/NewsArchieve';
+import UserProfile from './Components/User/UserProfile';
+import Admin from './Components/User/Admin';
+import StudySchedule from './Components/User/StudySchedule';
+import ExamSchedule from './Components/User/ExamSchedule';
+import CreateFaculty from './Components/User/CreateFaculty';
+import CreateCourse from './Components/User/CreateCourse';
+import toast , {Toaster} from 'react-hot-toast'
+
+// import { createBrowserRouter } from 'react-router-dom';
 
 function App() {
   let Query = new QueryClient()
@@ -38,6 +54,19 @@ function App() {
       {path:'ScientificJournals' , element:<ScientificJournals/>},
       {path:'ResearchCenters' , element:<ResearchCenters/>},
       {path:'ScientificConferences' , element:<ScientificConferences/>},
+      {path:'Contact' , element:<Contact/>},
+      {path:'SocialMedia' , element:<SocialMedia/>},
+      {path:'Location' , element:<Location/>},
+      {path:'ServicesList' , element:<ServicesList/>},
+      {path:'NewsDetails/:id' , element:<NewsDetails/>},
+      {path:'MoreScientists' , element:<MoreScientists/>},
+      {path:'NewsArchieve' , element:<NewsArchieve/>},
+      {path:'UserProfile' , element:<UserProfile/>},
+      {path:'Admin' , element:<Admin/>},
+      {path:'StudySchedule' , element:<StudySchedule/>},
+      {path:'ExamSchedule' , element:<ExamSchedule/>},
+      {path:'CreateFaculty' , element:<CreateFaculty/>},
+      {path:'CreateCourse' , element:<CreateCourse/>},
     ]}  
   ])
 
@@ -45,6 +74,7 @@ function App() {
     <>
       <QueryClientProvider client={Query}>
         <RouterProvider router={router}></RouterProvider>
+        <Toaster/>
       </QueryClientProvider>
     </>
   )

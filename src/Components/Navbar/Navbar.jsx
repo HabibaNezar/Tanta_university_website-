@@ -19,6 +19,11 @@ export default function Navbar() {
   const [isDropdownOpen8, setIsDropdownOpen8] = useState(false); 
   const [isDropdownOpen9, setIsDropdownOpen9] = useState(false); 
   const [isDropdownOpen10, setIsDropdownOpen10] = useState(false); 
+  
+  const [isDropdownOpen11, setIsDropdownOpen11] = useState(false); 
+  const [isDropdownOpen12, setIsDropdownOpen12] = useState(false); 
+  const [isDropdownOpen13, setIsDropdownOpen13] = useState(false); 
+  const [isDropdownOpen14, setIsDropdownOpen14] = useState(false); 
 
   const [isMenuOpen , setIsMenuOpen] = useState(false)
 
@@ -43,6 +48,15 @@ export default function Navbar() {
   const buttonRef9 = useRef(null);
   const dropdownRef10 = useRef(null);
   const buttonRef10 = useRef(null);
+  
+  const dropdownRef11 = useRef(null);
+  const buttonRef11 = useRef(null);
+  const dropdownRef12 = useRef(null);
+  const buttonRef12 = useRef(null);
+  const dropdownRef13 = useRef(null);
+  const buttonRef13 = useRef(null);
+  const dropdownRef14 = useRef(null);
+  const buttonRef14 = useRef(null);
 
   // 🟢 دالة إغلاق القائمة عند الضغط خارجها
   useEffect(() => {
@@ -127,42 +141,96 @@ export default function Navbar() {
       ) {
         setIsDropdownOpen10(false);
       }
+      
+      
+      if (
+        dropdownRef11.current &&
+        !dropdownRef11.current.contains(event.target) &&
+        buttonRef11.current &&
+        !buttonRef11.current.contains(event.target)
+      ) {
+        setIsDropdownOpen11(false);
+      }
+      if (
+        dropdownRef12.current &&
+        !dropdownRef12.current.contains(event.target) &&
+        buttonRef12.current &&
+        !buttonRef12.current.contains(event.target)
+      ) {
+        setIsDropdownOpen12(false);
+      }
+      if (
+        dropdownRef13.current &&
+        !dropdownRef13.current.contains(event.target) &&
+        buttonRef13.current &&
+        !buttonRef13.current.contains(event.target)
+      ) {
+        setIsDropdownOpen13(false);
+      }
+      if (
+        dropdownRef14.current &&
+        !dropdownRef14.current.contains(event.target) &&
+        buttonRef14.current &&
+        !buttonRef14.current.contains(event.target)
+      ) {
+        setIsDropdownOpen14(false);
+      }
     }
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+  
+  // 🟡 احذف useEffect الخاص بالـ Scroll وخلي الحالة ثابتة كده
+  const [bgColor, setBgColor] = useState("bg-white");
+  const [textColor , setTextColor] = useState("text-[--main-color]");
 
-  const [bgColor, setBgColor] = useState("bg-transparent");
-  const [textColor , setTextColor] = useState("text-white")
+  const closeAllMenus = () => {
+  setIsMenuOpen(false);
+  setIsDropdownOpen1(false);
+  setIsDropdownOpen2(false);
+  setIsDropdownOpen3(false);
+  setIsDropdownOpen4(false);
+  setIsDropdownOpen5(false);
+  setIsDropdownOpen6(false);
+  setIsDropdownOpen7(false);
+  setIsDropdownOpen8(false);
+  setIsDropdownOpen9(false);
+  setIsDropdownOpen10(false);
+  setIsDropdownOpen11(false);
+  setIsDropdownOpen12(false);
+  setIsDropdownOpen13(false);
+  setIsDropdownOpen14(false);
+  };
 
-  useEffect(() => {
-    let scrollCount = 0;
-    let lastScrollTop = 0;
 
-    const handleScroll = () => {
-      const currentScroll = window.scrollY;
+  // useEffect(() => {
+  //   let scrollCount = 0;
+  //   let lastScrollTop = 0;
 
-      if (currentScroll > lastScrollTop) {
-        scrollCount++;
-      } else {
-        scrollCount = Math.max(0, scrollCount - 1);
-      }
+  //   const handleScroll = () => {
+  //     const currentScroll = window.scrollY;
 
-      lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+  //     if (currentScroll > lastScrollTop) {
+  //       scrollCount++;
+  //     } else {
+  //       scrollCount = Math.max(0, scrollCount - 1);
+  //     }
 
-      if (scrollCount >= 3) {
-        setBgColor("bg-white shadow-md");
-        setTextColor("text-[--main-color]")
-      } else {
-        setBgColor("bg-transparent");
-        setTextColor("text-white")
-      }
-    };
+  //     lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  //     if (scrollCount >= 3) {
+  //       setBgColor("bg-white shadow-md");
+  //       setTextColor("text-[--main-color]")
+  //     } else {
+  //       setBgColor("bg-transparent");
+  //       setTextColor("text-white")
+  //     }
+  //   };
+
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, []);
 
   return (
     <nav className={`${bgColor} fixed w-screen top-0 left-0 right-0 z-50 transition-colors duration-300`}>
@@ -205,11 +273,11 @@ export default function Navbar() {
                   ref={dropdownRef1}
                   className={`${style.dropdownMenu} ${isDropdownOpen1 ? style.show : ""} `}>
                   <ul className="text-xs font-medium">
-                    <li><Link to={'vision'}>{t("الرؤية")}</Link></li>
-                    <li><Link to={'mission'}>{t("الرسالة")}</Link></li>
-                    <li><Link to={'goals'}>{t("الأهداف")}</Link></li>
-                    <li><Link to={'quality'}>{t("سياسة الجودة")}</Link></li>
-                    <li><a href="https://tanta.edu.eg/files/Strategic-Plan2021-2025.pdf" target="_blank">{t("الخطة الاستراتيجية")}</a></li>
+                    <li onClick={closeAllMenus}><Link to={'vision'}>{t("الرؤية")}</Link></li>
+                    <li onClick={closeAllMenus}><Link to={'mission'}>{t("الرسالة")}</Link></li>
+                    <li onClick={closeAllMenus}><Link to={'goals'}>{t("الأهداف")}</Link></li>
+                    <li onClick={closeAllMenus}><Link to={'quality'}>{t("سياسة الجودة")}</Link></li>
+                    <li onClick={closeAllMenus}><a href="https://tanta.edu.eg/files/Strategic-Plan2021-2025.pdf" target="_blank">{t("الخطة الاستراتيجية")}</a></li>
                   </ul>
               </div>
             </div>
@@ -246,11 +314,11 @@ export default function Navbar() {
                         onMouseLeave={() => setIsDropdownOpen7(false)}
                         className={`z-50 ${style.subdropdownMenu} ${style.dropdownMenu} ${isDropdownOpen7 ? style.show : ""} `}>
                         <ul  className={`text-xs font-medium ${style.mylist}`}>
-                          <li><a target="_blank" href="https://med.tanta.edu.eg/">{t("كلية الطب")}</a></li>
-                          <li><a target="_blank" href="https://pha.tanta.edu.eg/">{t("كلية الصيدلة")}</a></li>
-                          <li><a target="_blank" href="https://dent.tanta.edu.eg/">{t("كلية طب الأسنان")}</a></li>
-                          <li><a target="_blank" href="https://nur.tanta.edu.eg/">{t("كلية التمريض")}</a></li>
-                          <li><a target="_blank" href="https://tin.tanta.edu.eg/">{t("المعهد الفني للتمريض")}</a></li>
+                          <li onClick={closeAllMenus}><a target="_blank" href="https://med.tanta.edu.eg/">{t("كلية الطب")}</a></li>
+                          <li onClick={closeAllMenus}><a target="_blank" href="https://pha.tanta.edu.eg/">{t("كلية الصيدلة")}</a></li>
+                          <li onClick={closeAllMenus}><a target="_blank" href="https://dent.tanta.edu.eg/">{t("كلية طب الأسنان")}</a></li>
+                          <li onClick={closeAllMenus}><a target="_blank" href="https://nur.tanta.edu.eg/">{t("كلية التمريض")}</a></li>
+                          <li onClick={closeAllMenus}><a target="_blank" href="https://tin.tanta.edu.eg/">{t("المعهد الفني للتمريض")}</a></li>
                         </ul>
                       </div>
                     </li>
@@ -270,11 +338,11 @@ export default function Navbar() {
                         onMouseLeave={() => setIsDropdownOpen8(false)}
                         className={`z-50 ${style.subdropdownMenu} ${style.dropdownMenu} ${isDropdownOpen8 ? style.show : ""} `}>
                         <ul  className={`text-xs font-medium ${style.mylist}`}>
-                          <li><a target="_blank" href="https://sci.tanta.edu.eg/">{t("كلية العلوم")}</a></li>
-                          <li><a target="_blank" href="https://eng.tanta.edu.eg/">{t("كلية الهندسة")}</a></li>
-                          <li><a target="_blank" href="https://agr.tanta.edu.eg/">{t("كلية طب الزراعة")}</a></li>
-                          <li><a target="_blank" href="https://ci.tanta.edu.eg/">{t("كلية الحاسبات والمعلومات")}</a></li>
-                          <li><a target="_blank" href="https://app-arts.tanta.edu.eg/">{t("المعهد الفنون التطبيقية")}</a></li>
+                          <li onClick={closeAllMenus}><a target="_blank" href="https://sci.tanta.edu.eg/">{t("كلية العلوم")}</a></li>
+                          <li onClick={closeAllMenus}><a target="_blank" href="https://eng.tanta.edu.eg/">{t("كلية الهندسة")}</a></li>
+                          <li onClick={closeAllMenus}><a target="_blank" href="https://agr.tanta.edu.eg/">{t("كلية طب الزراعة")}</a></li>
+                          <li onClick={closeAllMenus}><a target="_blank" href="https://ci.tanta.edu.eg/">{t("كلية الحاسبات والمعلومات")}</a></li>
+                          <li onClick={closeAllMenus}><a target="_blank" href="https://app-arts.tanta.edu.eg/">{t("المعهد الفنون التطبيقية")}</a></li>
                         </ul>
                       </div>
                     </li>
@@ -294,9 +362,9 @@ export default function Navbar() {
                         onMouseLeave={() => setIsDropdownOpen9(false)}
                         className={`z-50 ${style.lastfinal} ${style.subdropdownMenu} ${style.dropdownMenu} ${isDropdownOpen9 ? style.show : ""} `}>
                         <ul  className={`text-xs font-medium ${style.mylist}`}>
-                          <li><a target="_blank" href="https://edu.tanta.edu.eg/">{t("كلية التربية")}</a></li>
-                          <li><a target="_blank" href="https://phy.tanta.edu.eg/">{t("كلية التربية الرياضية")}</a></li>
-                          <li><a target="_blank" href="https://spe.tanta.edu.eg/">{t("كلية التربية النوعية")}</a></li>
+                          <li onClick={closeAllMenus}><a target="_blank" href="https://edu.tanta.edu.eg/">{t("كلية التربية")}</a></li>
+                          <li onClick={closeAllMenus}><a target="_blank" href="https://phy.tanta.edu.eg/">{t("كلية التربية الرياضية")}</a></li>
+                          <li onClick={closeAllMenus}><a target="_blank" href="https://spe.tanta.edu.eg/">{t("كلية التربية النوعية")}</a></li>
                         </ul>
                       </div>
                     </li>
@@ -316,9 +384,9 @@ export default function Navbar() {
                         onMouseLeave={() => setIsDropdownOpen10(false)}
                         className={`z-50 ${style.final} ${style.subdropdownMenu} ${style.dropdownMenu} ${isDropdownOpen10 ? style.show : ""} `}>
                         <ul  className={`text-xs font-medium ${style.mylist}`}>
-                          <li><a target="_blank" href="https://com.tanta.edu.eg/">{t("كلية التجارة")}</a></li>
-                          <li><a target="_blank" href="https://art.tanta.edu.eg/">{t("كليةالاداب")}</a></li>
-                          <li><a target="_blank" href="https://law.tanta.edu.eg/">{t("كلية الحقوق")}</a></li>
+                          <li onClick={closeAllMenus}><a target="_blank" href="https://com.tanta.edu.eg/">{t("كلية التجارة")}</a></li>
+                          <li onClick={closeAllMenus}><a target="_blank" href="https://art.tanta.edu.eg/">{t("كليةالاداب")}</a></li>
+                          <li onClick={closeAllMenus}><a target="_blank" href="https://law.tanta.edu.eg/">{t("كلية الحقوق")}</a></li>
                         </ul>
                       </div>
                     </li>
@@ -351,7 +419,7 @@ export default function Navbar() {
               </div>
             </div> */}
 
-            {/* القائمة الرابعة */}
+            {/* القائمة التالتة */}
             <div className="relative">
               <button
                   ref={buttonRef4}
@@ -367,16 +435,16 @@ export default function Navbar() {
                   ref={dropdownRef4}
                   className={`${style.dropdownMenu} ${isDropdownOpen4 ? style.show : ""} `}>
                   <ul className="text-xs font-medium">
-                    <li><NavLink to={`/ResearchProjects`}>{t("المراكز البحثيه")}</NavLink></li>
-                    <li><NavLink to={`/ScientificJournals`}>{t("المجلات العلمية")}</NavLink></li>
-                    <li><NavLink to={`/ScientificConferences`} target="_blank">{t("المؤتمرات العلمية")}</NavLink></li>
-                    <li><NavLink to={`ResearchCenters`}>{t("المشروعات البحثيه")}</NavLink></li>
-                    <li><a href="https://tuscholar.tanta.edu.eg/" target="_blank">{t("الأبحاث العلمية")}</a></li>
+                    <li onClick={closeAllMenus}><NavLink to={`/ResearchProjects`}>{t("المراكز البحثيه")}</NavLink></li>
+                    <li onClick={closeAllMenus}><NavLink to={`/ScientificJournals`}>{t("المجلات العلمية")}</NavLink></li>
+                    <li onClick={closeAllMenus}><NavLink to={`/ScientificConferences`} target="_blank">{t("المؤتمرات العلمية")}</NavLink></li>
+                    <li onClick={closeAllMenus}><NavLink to={`ResearchCenters`}>{t("المشروعات البحثيه")}</NavLink></li>
+                    <li onClick={closeAllMenus}><a href="https://tuscholar.tanta.edu.eg/" target="_blank">{t("الأبحاث العلمية")}</a></li>
                   </ul>
               </div>
             </div>
             
-            {/* القائمة الخامسة */}
+            {/* القائمة الرابعة */}
             <div className="relative">
               <button
                   ref={buttonRef5}
@@ -392,15 +460,103 @@ export default function Navbar() {
                   ref={dropdownRef5}
                   className={`${style.dropdownMenu} ${isDropdownOpen5 ? style.show : ""} `}>
                   <ul className="text-xs font-medium">
-                  <li><a href="#">{t("الكليات الطبية")}</a></li>
-                  <li><a href="#">{t("الكليات العلمية")}</a></li>
-                  <li><a href="#">{t("الكليات التربوية")}</a></li>
-                  <li><a href="#">{t("الكليات الأدارية والانسانية")}</a></li>
+                    <li>
+                      <button
+                        ref={buttonRef11}
+                        onClick={() => setIsDropdownOpen11(!isDropdownOpen11)}
+                        className="w-full font-medium text-sm flex items-center justify-between text-white rounded-sm">
+                        <span className="ml-auto">{t("الكليات الطبية")}</span>   
+                        <svg className={`${style.arrow} w-2 h-2 rotate-90 `} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m1 1 4 4 4-4" />
+                        </svg>
+                      </button>
+                      <div
+                        ref={dropdownRef11}
+                        onMouseEnter={() => setIsDropdownOpen11(true)}
+                        onMouseLeave={() => setIsDropdownOpen11(false)}
+                        className={`z-50 ${style.subdropdownMenu} ${style.dropdownMenu} ${isDropdownOpen11 ? style.show : ""} `}>
+                        <ul  className={`text-xs font-medium ${style.mylist}`}>
+                          <li onClick={closeAllMenus}><a target="_blank" href="https://med.tanta.edu.eg/newprog.aspx">{t("كلية الطب")}</a></li>
+                          <li onClick={closeAllMenus}><a target="_blank" href="https://pha.tanta.edu.eg/newprog.aspx/">{t("كلية الصيدلة")}</a></li>
+                          <li onClick={closeAllMenus}><a target="_blank" href="https://dent.tanta.edu.eg/newprog.aspx">{t("كلية طب الأسنان")}</a></li>
+                          <li onClick={closeAllMenus}><a target="_blank" href="https://nur.tanta.edu.eg/newprog.aspx">{t("كلية التمريض")}</a></li>
+                          <li onClick={closeAllMenus}><a target="_blank" href="https://tin.tanta.edu.eg/newprog.aspx">{t("المعهد الفني للتمريض")}</a></li>
+                        </ul>
+                      </div>
+                    </li>
+                    <li>
+                      <button
+                        ref={buttonRef12}
+                        onClick={() => setIsDropdownOpen12(!isDropdownOpen12)}
+                        className="w-full font-medium text-sm flex items-center justify-between text-white rounded-sm">
+                        <span className="ml-auto">{t("الكليات العلمية")}</span>   
+                        <svg className={`${style.arrow} w-2 h-2 rotate-90 `} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m1 1 4 4 4-4" />
+                        </svg>
+                      </button>
+                      <div
+                        ref={dropdownRef12}
+                        onMouseEnter={() => setIsDropdownOpen12(true)}
+                        onMouseLeave={() => setIsDropdownOpen12(false)}
+                        className={`z-50 ${style.subdropdownMenu} ${style.dropdownMenu} ${isDropdownOpen12 ? style.show : ""} `}>
+                        <ul  className={`text-xs font-medium ${style.mylist}`}>
+                          <li onClick={closeAllMenus}><a target="_blank" href="https://tin.tanta.edu.eg/newprog.aspx">{t("كلية العلوم")}</a></li>
+                          <li onClick={closeAllMenus}><a target="_blank" href="https://eng.tanta.edu.eg/newprog.aspx">{t("كلية الهندسة")}</a></li>
+                          <li onClick={closeAllMenus}><a target="_blank" href="https://agr.tanta.edu.eg/">{t("كلية طب الزراعة")}</a></li>
+                          <li onClick={closeAllMenus}><a target="_blank" href="https://ci.tanta.edu.eg/">{t("كلية الحاسبات والمعلومات")}</a></li>
+                          <li onClick={closeAllMenus}><a target="_blank" href="https://app-arts.tanta.edu.eg/">{t("المعهد الفنون التطبيقية")}</a></li>
+                        </ul>
+                      </div>
+                    </li>
+                    <li>
+                      <button
+                        ref={buttonRef13}
+                        onClick={() => setIsDropdownOpen13(!isDropdownOpen13)}
+                        className="w-full font-medium text-sm flex items-center justify-between text-white rounded-sm">
+                        <span className="ml-auto">{t("الكليات التربوية")}</span>   
+                        <svg className={`${style.arrow} w-2 h-2 rotate-90 `} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m1 1 4 4 4-4" />
+                        </svg>
+                      </button>
+                      <div
+                        ref={dropdownRef13}
+                        onMouseEnter={() => setIsDropdownOpen13(true)}
+                        onMouseLeave={() => setIsDropdownOpen13(false)}
+                        className={`z-50 ${style.lastfinal} ${style.subdropdownMenu} ${style.dropdownMenu} ${isDropdownOpen13 ? style.show : ""} `}>
+                        <ul  className={`text-xs font-medium ${style.mylist}`}>
+                          <li onClick={closeAllMenus}><a target="_blank" href="https://prog.tanta.edu.eg/ar/prog/eng_edu">{t("كلية التربية")}</a></li>
+                          <li onClick={closeAllMenus}><a target="_blank" href="https://phy.tanta.edu.eg/">{t("كلية التربية الرياضية")}</a></li>
+                          <li onClick={closeAllMenus}><a target="_blank" href="https://spe.tanta.edu.eg/">{t("كلية التربية النوعية")}</a></li>
+                        </ul>
+                      </div>
+                    </li>
+                    <li>
+                      <button
+                        ref={buttonRef14}
+                        onClick={() => setIsDropdownOpen14(!isDropdownOpen14)}
+                        className="w-full font-medium text-sm flex items-center justify-between text-white rounded-sm">
+                        <span className="ml-auto text-xs">{t("الكليات الادارية والانسانية")}</span>   
+                        <svg className={`${style.arrow} w-2 h-2 rotate-90 `} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m1 1 4 4 4-4" />
+                        </svg>
+                      </button>
+                      <div
+                        ref={dropdownRef14}
+                        onMouseEnter={() => setIsDropdownOpen14(true)}
+                        onMouseLeave={() => setIsDropdownOpen14(false)}
+                        className={`z-50 ${style.final} ${style.subdropdownMenu} ${style.dropdownMenu} ${isDropdownOpen14 ? style.show : ""} `}>
+                        <ul  className={`text-xs font-medium ${style.mylist}`}>
+                          <li onClick={closeAllMenus}><a target="_blank" href="https://com.tanta.edu.eg/newprog.aspx">{t("كلية التجارة")}</a></li>
+                          <li onClick={closeAllMenus}><a target="_blank" href="https://art.tanta.edu.eg/newprog.aspx">{t("كليةالاداب")}</a></li>
+                          <li onClick={closeAllMenus}><a target="_blank" href="https://law.tanta.edu.eg/newprog.aspx">{t("كلية الحقوق")}</a></li>
+                        </ul>
+                      </div>
+                    </li>
                   </ul>
               </div>
             </div>
 
-            {/* القائمة السادسه */}
+            {/* القائمة الخامسة */}
             <div className="relative">
               <button
                   ref={buttonRef6}
@@ -416,8 +572,9 @@ export default function Navbar() {
                   ref={dropdownRef6}
                   className={`${style.dropdownMenu} ${isDropdownOpen6 ? style.show : ""} `}>
                   <ul className="text-xs font-medium">
-                  <li><a href="#">{t("تواصل معنا")}</a></li>
-                  <li><a href="#">{t("أرقام هامة")}</a></li>
+                    <li onClick={closeAllMenus}><NavLink to={`/Contact`}>{t("تواصل معنا")}</NavLink></li>
+                    <li onClick={closeAllMenus}><NavLink to={`Location`}>{t("الموقع الجغرافي")}</NavLink></li>
+                    {/* <li><NavLink to={`/SocialMedia`}>{t("وسائل التواصل الاجتماعي")}</NavLink></li> */}
                   </ul>
               </div>
             </div>
