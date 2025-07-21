@@ -437,7 +437,7 @@ export default function Navbar() {
                   <ul className="text-xs font-medium">
                     <li onClick={closeAllMenus}><NavLink to={`/ResearchProjects`}>{t("المراكز البحثيه")}</NavLink></li>
                     <li onClick={closeAllMenus}><NavLink to={`/ScientificJournals`}>{t("المجلات العلمية")}</NavLink></li>
-                    <li onClick={closeAllMenus}><NavLink to={`/ScientificConferences`} target="_blank">{t("المؤتمرات العلمية")}</NavLink></li>
+                    <li onClick={closeAllMenus}><NavLink to={`/ScientificConferences`}>{t("المؤتمرات العلمية")}</NavLink></li>
                     <li onClick={closeAllMenus}><NavLink to={`ResearchCenters`}>{t("المشروعات البحثيه")}</NavLink></li>
                     <li onClick={closeAllMenus}><a href="https://tuscholar.tanta.edu.eg/" target="_blank">{t("الأبحاث العلمية")}</a></li>
                   </ul>

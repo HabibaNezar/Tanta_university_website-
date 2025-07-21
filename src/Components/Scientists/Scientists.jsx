@@ -81,7 +81,6 @@ export default function Scientists() {
       <div>
         <NavLink
           to={`/MoreScientists`}
-          target='_blank'
           className="text-xs sm:text-sm font-medium rounded-md px-4 py-1 bg-[--main-color] text-white hover:bg-white hover:text-[--main-color] border border-[--main-color] cursor-pointer"
         >
           علماء الجامعة
